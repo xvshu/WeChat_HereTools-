@@ -1,0 +1,8 @@
+/**app.wxss**/
+@import "/wxParse/wxParse.wxss";
+.container {
+  height: 100%;
+  background: #f4f4f4;
+  position: relative;
+} 
+

@@ -1,0 +1,34 @@
+<!--pages/SZJ/SZJ.wxml-->
+<view class="container">
+    <view class="table">
+        <view class="tr">
+            <view class="th">弟</view>
+            <view class="th">子</view>
+            <view class="th">规</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s1}}</view>
+            <view class="td">{{s2}}</view>
+            <view class="td">{{s3}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s4}}</view>
+            <view class="td">{{s5}}</view>
+            <view class="td">{{s6}}</view>
+        </view>
+         <view class="tr">
+            <view class="td">{{s7}}</view>
+            <view class="td">{{s8}}</view>
+            <view class="td">{{s9}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s10}}</view>
+            <view class="td">{{s11}}</view>
+            <view class="td">{{s12}}</view>
+        </view>
+         <view  class="tr">
+            <button class="td" type="default" bindtap="upPage" > 上一页 </button>
+            <button class="td" type="default" bindtap="nextPage" > 下一页 </button>
+        </view>
+    </view>
+</view>

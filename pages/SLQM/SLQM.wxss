@@ -1,0 +1,33 @@
+/* pages/SZJ/SZJ.wxss */
+page {
+  font-size: 54px;
+  color: #333
+}
+.table {
+  border:1px solid #dadada;
+  border-right: 0;
+  border-bottom: 0;
+  width: 98%;
+}
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.th,.td {
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  width:100%
+}
+.td{
+  font-size: 30px;
+}
+.th {
+  font-weight: 400;
+  background-color: #dadada
+}
+button{
+  margin-top: 10px;
+}

@@ -1,0 +1,19 @@
+<view class="content">
+    <!-- 头像 -->
+    <view class="author-date"> 
+        <image src="/image/1_xvshu.png" class="author"></image>
+        <text class="date">	2018年08月15日</text>
+    </view>
+    <!-- 标题内容 -->
+     <text class="title">ImageNet-ResNet_50 图片分类平台</text>
+     <image class="image" src="/image/81702847/main.jpg"></image>
+     <text class="article-content">最近公司要在AI领域发力，基于此，研究了Resnet50的图片分类，网络上有很多的例子，但是都没有做成平台化，提供一个组件一样供各个业务平台使用，基于此，在Resnet50的基础上，扩展了登陆，图片类别添加，上传图片，自动离散图片到训练集与测试集，页面api提供重新训练按钮，测试图片分类结果页面。\n</text>
+     <text class="h1">github\n</text>
+     <text class="article-content">本文代码：
+https://github.com/xvshu/ImageNet-Api \n</text>
+      <text class="h1">TensorBoard \n</text>
+      <image class="image" src="/image/81702847/t1.png"></image>
+
+
+
+</view>

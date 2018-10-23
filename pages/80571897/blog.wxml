@@ -1,0 +1,42 @@
+<view class="content">
+    <!-- 头像 -->
+    <view class="author-date"> 
+        <image src="/image/1_xvshu.png" class="author"></image>
+        <text class="date">	2018年06月04日</text>
+    </view>
+    <!-- 标题内容 -->
+     <text class="title">二维码登录（一）概要设计子</text>
+     <image src="/image/80571897/main.png"></image>
+     <view>
+     <text class="article-content">随着智能机的普及，在手持设备端做用户验证是一种较为高效，安全的手段，而在pc端利用已经鉴权过的手持设备扫码登录不仅方便，而且安全。
+本文档旨在指导二维码登录功能的开发。
+本文代码git https://github.com/xvshu/qrlogin
+\n</text>
+     <text class="h1">数据结构说明\n</text>
+     <text class="article-content"> redis节点存储数据格式为hash结构：
+    key：qrlogin_年月日
+    field：qrlogin_唯一标识
+    value：用户id
+    失效时间：2天。\n \n</text>
+    </view>
+    <view>
+      <text class="h1">生成二维码流程： \n</text>
+      <image  src="/image/80571897/create_code.png"></image>
+    </view>
+
+    <view>
+      <text class="h1">扫码登录流程： \n</text>
+      <image  src="/image/80571897/use_code.png"></image>
+    </view>
+      <text class="h1">总结： \n</text>
+      <text class="article-content"> 二维码登录的简单设计相对来说比较容易，但是后期要考虑ddos攻击等安全问题，一般从两个方面入手：
+1. 生成二维码网关
+在页面上对生成二维码有严格性能要求，同一ip同一时间只允许生成3次每秒，超过此限制，返回过于频繁，自动失败。
+2. 授权登录（APP）网关
+在页面上对授权有严格性能要求，同一ip同一时间只允许登录1次每分钟，超过此限制，返回过于频繁，自动失败。\n
+        </text>
+      
+
+
+
+</view>

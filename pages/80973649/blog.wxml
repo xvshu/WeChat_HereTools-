@@ -1,0 +1,25 @@
+<view class="content">
+    <!-- 头像 -->
+    <view class="author-date"> 
+        <image src="/image/1_xvshu.png" class="author"></image>
+        <text class="date">	2018年07月09日</text>
+    </view>
+    <!-- 标题内容 -->
+     <text class="title">AIML应答机器人(一)aiml简介</text>
+     <image src="/image/80973649/main.jpg"></image>
+     <view>
+     <text class="article-content">想做一款和上图一样的自动应答机器人吗，跟着博客，咱们一步步实现，现在开始第一个内容，简单了解下什么是AIML语言
+\n</text>
+     <text class="h1">AIML\n</text>
+     <text class="article-content">  AIML：人工智能标记语言(Artificial Intelligence Markup Language)
+AIML（人工智能标记语言）是一种XML兼容的语言，很容易学习，并且可以开始定制艾尔博特（Alicebot）或分分钟创建一个scratch机器人。AIML最重要的单元有：
+开始和结束一个AIML文档的标签（tag）标志着一个艾尔博特知识库（Alicebot's knowledge base）的“知识单元”标签用于包含匹配用户给艾尔博特（an Alicebot）机器人可以说或键入字符的一个简单模式（simple pattern）包含对用户输入（user input）的响应AIML文件中经常发现有20个左右或附加多个标签（tags），创建自己所谓“自定义谓词（custom predicates）”是可能的。现在，AIML Primer提供一个AIML初学者指南。免费Alice机器人人工智能标记语言（The free Alice机器人 AIML）包括一个约41000分类的知识库（knowledge base）\n \n</text>
+    </view>
+    <view>
+      <text class="h1">举例： \n</text>
+      <image  src="/image/80973649/code.jpg"></image>
+    </view>
+
+
+
+</view>

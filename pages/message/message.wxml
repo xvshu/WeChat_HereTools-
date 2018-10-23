@@ -1,0 +1,14 @@
+<!--message.wxml-->
+
+<view class="container">
+  <view class='content'>
+    <view class='post header'>
+      <text class='title'>关于我</text>
+      <text>本文博客原地址：https://blog.csdn.net/xvshu 如有某种合作意向，可通过以下任何一方式联系到我</text>
+      <text>(1)邮箱：214994750@qq.com</text>
+      <text>(2)GIT:https://github.com/xvshu</text>
+      <text>(3)QQ:214994750</text>
+      <button type="primary" bindtap="gotoBlog" > 大叔精品博客 </button>
+    </view>
+  </view>
+</view>

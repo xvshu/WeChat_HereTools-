@@ -1,0 +1,44 @@
+<view class="content">
+    <!-- 头像 -->
+    <view class="author-date"> 
+        <image src="/image/1_xvshu.png" class="author"></image>
+        <text class="date">	2018年04月04日</text>
+    </view>
+    <!-- 标题内容 -->
+     <text class="title">APM监控--（四）Pinpoint扩展报警</text>
+     <image src="/image/79814549/main.jpg"></image>
+     <view>
+     <text class="article-content">部署完成pinpoint之后，并没有开放报警功能，而报警是每个公司都必要的功能，以下就跟着我一起开始开发报警功能并部署到服务器。
+\n</text>
+     <text class="h1">下载源码包\n</text>
+     <text class="article-content"> 地址：https://github.com/naver/pinpoint/releases
+选择对应版本源码包，本次为1.7.1，单击下载\n \n</text>
+<image  src="/image/79814549/git.jpg"></image>
+    </view>
+    <view>
+      <text class="h1">新增报警类： \n</text>
+      <text class="article-content"> 开发工具加载web文件夹web包下pom文件新增发送邮件依赖\n</text>
+      <image  src="/image/79814549/maven.jpg"></image>
+    </view>
+
+    <view>
+      <text class="h1">修改AlarmWriter使用自定义报警类： \n</text>
+      <image  src="/image/79814549/alert.jpg"></image>
+    </view>
+     <view>
+      <text class="h1">修改batch.enable配置： \n</text>
+      <image  src="/image/79814549/config.jpg"></image>
+    </view>
+    <view>
+      <text class="h1">配置mysql： \n</text>
+      <image  src="/image/79814549/mysql.jpg"></image>
+    </view>
+    <view>
+      <text class="h1">~~~~未完，请移步博客查看完整文章：https://blog.csdn.net/xvshu/article/details/79814549 \n</text>
+    </view>
+      
+      
+
+
+
+</view>

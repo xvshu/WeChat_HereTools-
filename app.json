@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/81702847/blog",
+    "pages/81102203/blog",
+    "pages/80571897/blog",
+    "pages/80973649/blog",
+    "pages/79814549/blog",
+    "pages/76419360/blog",
+    "pages/message/message",
+    "pages/guoxue/guoxue",
+    "pages/SZJ/SZJ",
+    "pages/QZW/QZW",
+    "pages/BJX/BJX",
+    "pages/DZG/DZG",
+    "pages/SLQM/SLQM"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "大叔工具箱",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "国学启蒙",
+        "selectedIconPath": "icon/home1.png",
+        "iconPath": "icon/home.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "关于我",
+        "selectedIconPath": "icon/message1.png",
+        "iconPath": "icon/message.png"
+      }
+    ],
+    "borderStyle": "white",
+    "color": "#333",
+    "selectedColor": "#2ebaae"
+  }
+}

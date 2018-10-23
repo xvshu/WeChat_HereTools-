@@ -1,0 +1,504 @@
+
+
+		<img src="https://img-blog.csdn.net/20180709164324337?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h2c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" /></p><p>想做一款和上图一样的自动应答机器人吗，跟着博客，咱们一步步实现，现在开始第二个内容，开始做一个java版的聊天程序</p><p>本文源码地址：https://github.com/xvshu/alice_bot</p><p>源码入口：<br /></p><p>AIML工厂：AliceBotMother</p><pre><code class="language-java">/*
+Copyleft (C) 2005 Hélio Perroni Filho
+xperroni@yahoo.com
+ICQ: 2490863
+
+This file is part of ChatterBean.
+
+ChatterBean is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+ChatterBean is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with ChatterBean (look at the Documents/ directory); if not, either write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA, or visit (http://www.gnu.org/licenses/gpl.txt).
+*/
+
+package bitoflife.chatterbean;
+
+import bitoflife.chatterbean.parser.AliceBotParser;
+import bitoflife.chatterbean.util.Searcher;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+
+public class AliceBotMother
+{
+  /*
+  Attribute Section
+  */
+  
+  private ByteArrayOutputStream gossip;
+  
+  /*
+  Event Section
+  */
+  
+  public void setUp()
+  {
+    gossip = new ByteArrayOutputStream();
+  }
+  
+  /*
+  Method Section
+  */
+  
+  public String gossip()
+  {
+    return gossip.toString();
+  }
+
+  public AliceBot newInstance() throws Exception
+  {
+    Searcher searcher = new Searcher();
+    AliceBotParser parser = new AliceBotParser();
+    AliceBot bot = parser.parse(getClass().getResourceAsStream("/conf/context.xml"),
+            getClass().getResourceAsStream("/conf/splitters.xml"),
+            getClass().getResourceAsStream("/conf/substitutions.xml"),
+                                searcher.search(getClass().getResource("/Corpus/Chinese").toString().substring(5), ".*\\.xml"));
+
+    Context context = bot.getContext(); 
+    context.outputStream(gossip);
+    return bot;
+  }
+}
+</code></pre><br /><p>web入口AskServlet</p><pre><code class="language-java">package com.web;
+
+import com.context.ChartManager;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class AskServlet extends HttpServlet {
+
+    private ChartManager chartManager = null;
+
+    public AskServlet() {
+        super();
+        chartManager = ChartManager.getInstance();
+    }
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String askWord=request.getParameter("askWord");
+        String outWord=chartManager.response(askWord);
+        response.setContentType("text/html");
+        response.getWriter().println(outWord);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
+        String askWord=request.getParameter("askWord");
+        System.out.println("askWord:"+String.valueOf(askWord));
+        String outWord=chartManager.response(askWord);
+        System.out.println("outWord:"+String.valueOf(outWord));
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().println(outWord);
+    }
+}
+</code></pre><p>html页面</p><pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+    &lt;title&gt;客服小A&lt;/title&gt;
+    &lt;script src='js/jquery-1.8.3.min.js'&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function(){
+            document.onkeydown = function(e){
+                var ev = document.all ? window.event : e;
+                if(ev.keyCode==13) {
+                    takeMsg();
+                }
+            }
+        });
+    &lt;/script&gt;
+    &lt;style type="text/css"&gt;
+        .talk_con{
+            width:600px;
+            height:530px;
+            border:1px solid #666;
+            margin:50px auto 0;
+            background:#f9f9f9;
+            border-radius:10px 10px 10px 10px;
+        }
+        .talk_show{
+            width:580px;
+            height:420px;
+            border:1px solid #666;
+            background:#fff;
+            margin:10px auto 0;
+            overflow:auto;
+        }
+        .talk_input{
+            width:580px;
+            margin:10px auto 0;
+        }
+        .whotalk{
+            width:80px;
+            height:30px;
+            float:left;
+            outline:none;
+        }
+        .talk_word{
+            width:500px;
+            height:26px;
+            padding:0px;
+            float:left;
+            margin-left:10px;
+            outline:none;
+            text-indent:10px;
+        }        
+        .talk_sub{
+            width:56px;
+            height:30px;
+            float:left;
+            margin-left:10px;
+        }
+        .atalk{
+           margin:10px auto;
+        }
+        .atalk span{
+            display:inline-block;
+            background:#0181cc;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+            margin:1px auto;
+        }
+        .btalk{
+            margin:10px auto;
+            text-align:right;
+        }
+        .btalk span{
+            display:inline-block;
+            background:#ef8201;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+            margin:1px auto;
+        }
+        iframe html body
+        {
+            zoom: 60%;
+        }
+    &lt;/style&gt;
+    &lt;script type="text/javascript"&gt;      
+    //
+    var count_msg=1;
+        window.onload = function(){
+            var Words = document.getElementById("words");
+            var TalkWords = document.getElementById("talkwords");
+            var TalkSub = document.getElementById("talksub");
+
+            TalkSub.onclick = function(){
+                takeMsg();
+            }
+
+        }
+
+        function takeMsg(){
+            Words = document.getElementById("words");
+            TalkWords = document.getElementById("talkwords");
+            TalkSub = document.getElementById("talksub");
+
+            count_msg=count_msg+1;
+            //定义空字符串
+            var str = "";
+            if(TalkWords.value == ""){
+                // 消息为空时弹窗
+                alert("消息不能为空");
+                return;
+            }
+
+            //提问
+            str = '&lt;div id="msgtext_'+count_msg+'" class="btalk"&gt;&lt;img style="width: 45px;" src="img/user.png"&gt;&lt;/img&gt;&lt;span&gt;' + TalkWords.value +'&lt;/span&gt;&lt;/div&gt;' ;
+            Words.innerHTML = Words.innerHTML + str;
+            document.getElementById("msgtext_"+count_msg).scrollIntoView();
+            count_msg=count_msg+1;
+
+            $.get("/ask",{askWord:TalkWords.value},function(data){
+                //ajax应答
+                if(data.indexOf("url:")!=-1){
+                    str = '&lt;div id="msgtext_'+count_msg+'" class="atalk"&gt;&lt;img style="width: 45px;" src="img/kf.png"&gt;&lt;/img&gt;&lt;span&gt;&lt;iframe style="height: 550px;width: 380px;"  scrolling="no" src="'+data.substring(4)+'"&gt;&lt;/iframe&gt;&lt;/span&gt;&lt;/div&gt;';
+                }else{
+                    str = '&lt;div id="msgtext_'+count_msg+'" class="atalk"&gt;&lt;img style="width: 45px;" src="img/kf.png"&gt;&lt;/img&gt;&lt;span&gt;' + data +'&lt;/span&gt;&lt;/div&gt;';
+                }
+                Words.innerHTML = Words.innerHTML + str;
+                document.getElementById("msgtext_"+count_msg).scrollIntoView();
+                count_msg=count_msg+1;
+            });
+        }
+
+
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="talk_con"&gt;
+        &lt;div class="talk_input"&gt;
+            &lt;span &gt;AIML应答机器人--小A&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="talk_show" id="words"&gt;
+            &lt;div class="atalk"&gt;&lt;img style="width: 45px;" src="img/kf.png"&gt;&lt;/img&gt;&lt;span id="asay"&gt;您好，很高兴为您服务，请问有什么可以帮助您？&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="talk_input"&gt;
+            &lt;input type="text" class="talk_word" id="talkwords"&gt;
+            &lt;input type="button" value="发送" class="talk_sub" id="talksub"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>实现效果：</p><p><img src="https://img-blog.csdn.net/20180709171101131?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h2c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" /></p><p><img src="https://img-blog.csdn.net/20180709171111858?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h2c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" /></p><p><br /></p><p>是不是非常简单，只需要将git代码clone到本地，初始化mysql（备用，扩展以后人工录入），编写自己公司的xml应答文件，我这里给公司大米时代（北京）编写了一份，请大家参考：</p><pre><code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;aiml&gt;
+
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米老师*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米新江*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*新江*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*大米时代*创*人*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*提高班*创*人*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米老师*语录*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米新江*语录*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*新江*语录*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*新江*话*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米老师*话*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米教授*话*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*米教授*语录*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;米老师语录&lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+
+    &lt;category&gt;
+        &lt;pattern&gt;*入*大米时代*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+
+    &lt;category&gt;
+        &lt;pattern&gt;*进*大米时代*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*加*大米时代*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*入*提高班*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*进*提高班*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*加*提高班*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;报名大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;*大米时代*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+    &lt;category&gt;
+        &lt;pattern&gt;*提高班*&lt;/pattern&gt;
+        &lt;template&gt;
+            &lt;srai&gt;大米时代
+            &lt;/srai&gt;
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;大米时代&lt;/pattern&gt;
+        &lt;template&gt;
+            大米时代（北京）教育科技有限公司，前身为廊坊师范学院信息技术提高班,始于1993年，创建者为米新江教授。
+            大米时代以“授之以欲、受之以愉、渔之于渔”为教育理念，主张“把错误放在现在，把成功放在未来”。
+            大米时代总部位于北京市海淀区，现正在北京、广州、珠海、鄂尔多斯、廊坊、衡水、张家口、三河等地陆续开设分校或运营中心。
+            详情请访问大米时代官网：http://www.dmsdbj.com/
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;报名大米时代&lt;/pattern&gt;
+        &lt;template&gt;
+            座机：010-51292788 或者 0316-5552070， 手机（微信）：1583163905，
+            邮箱：3460307818@qq.com，
+            地址：廊坊市广阳区文明路与永丰道交叉口志晟创客中心四楼，我们期待您的来访！
+            详情请访问大米时代官网：http://www.dmsdbj.com/
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;米老师&lt;/pattern&gt;
+        &lt;template&gt;
+            米新江教授。任职于廊坊师范学院，至今从业近三十载。2001年创建了廊坊师范学院信息技术提高班，以独特的教学方法和教育理念培养出一群“狼”一样的学生，得到社会的广泛认可。为教育界和IT界做出了突出贡献。颇具社会影响力。
+            2011年12月，清华大学计算机杂志社主编和多所名校（北京大学、天津师范大学、清华大学、北京交通大学等）的专家教授来信息技术提高班观摩指导，
+            对米新江教授的信息技术提高班教学理念和教育模式给予了肯定。其后，众多知名杂志周刊、新闻网站对米新江教授及信息技术提高班的报道，引发了社会的高度关注。
+            详情请访问大米时代官网：http://www.dmsdbj.com/
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+    &lt;category&gt;
+        &lt;pattern&gt;米老师语录&lt;/pattern&gt;
+        &lt;template&gt;
+            你应该看看这个哦：
+            &lt;random&gt;
+                &lt;li&gt;多一个朋友，多一条路；多一个仇人，多一堵墙。	&lt;/li&gt;
+                &lt;li&gt;对我越是不喜欢的人，我越是客气。	&lt;/li&gt;
+                &lt;li&gt;对待生活，合适的编码很重要。	&lt;/li&gt;
+                &lt;li&gt;我在乎的不是你心里怎么想我的；我在乎的是你怎么对我的。	&lt;/li&gt;
+                &lt;li&gt;你有什么理由不积极主动？	&lt;/li&gt;
+                &lt;li&gt;别人心里喜不喜欢你，对你一点也不重要，重要的是别人怎么对你。	&lt;/li&gt;
+                &lt;li&gt;在你不喜欢一个人的时候，你可以试着对这个人好。如果这样，慢慢你就会发现那个你不喜欢的人其实也挺好。	&lt;/li&gt;
+                &lt;li&gt;学习是终生的，你什么时候停止学习，你什么时候就被淘汰。	&lt;/li&gt;
+                &lt;li&gt;这个时代，赋予我们两种选择：要么被信息大潮吞没；要么站在潮头做弄潮儿！	&lt;/li&gt;
+                &lt;li&gt;我只不过是一座桥梁，一座横跨世界的桥梁。	&lt;/li&gt;
+                &lt;li&gt;郭靖有两个东西：一个使拥有很多师父；另一个是在实战中磨练。所以华山论剑，郭靖天下第一。	&lt;/li&gt;
+                &lt;li&gt;授之以欲，受之以愉，渔之以鱼。	&lt;/li&gt;
+                &lt;li&gt;变是永远不变的。	&lt;/li&gt;
+                &lt;li&gt;不怕不知道，就怕不知道。	&lt;/li&gt;
+                &lt;li&gt;光低头学习就是一傻帽。	&lt;/li&gt;
+                &lt;li&gt;不谋全局者不足谋一域，不谋万世者不足谋一时。	&lt;/li&gt;
+                &lt;li&gt;还有比不要脸更薄的脸吗？	&lt;/li&gt;
+                &lt;li&gt;学多少都没用，不学更没用！	&lt;/li&gt;
+                &lt;li&gt;困难是进步的阶梯	&lt;/li&gt;
+                &lt;li&gt;多看帮助，少走弯路	&lt;/li&gt;
+                &lt;li&gt;站在巨人的肩膀上	&lt;/li&gt;
+                &lt;li&gt;教育是一门艺术	&lt;/li&gt;
+                &lt;li&gt;学无止境	&lt;/li&gt;
+                &lt;li&gt;一个讲一百个函数的老师是个神经病，但是一个“傻瓜”学生想要质变就必须首先听这个神经病老师的课，达到他的水平再去听好老师的课，否则将一团雾水听不明白最后只等于浪费生命......	&lt;/li&gt;
+                &lt;li&gt;学习一种思想，逻辑思想，只有有了正确的思想才能准确而有效率的做事，建立一种全面的思考方式，基础要明白，原理要明白，才会学会学习。合理安排时间，集中精力！	&lt;/li&gt;
+                &lt;li&gt;自己的兴趣才是动力，自控能力至关重要！倘若正当学习的时候没有学，会后悔的！	&lt;/li&gt;
+                &lt;li&gt;一边体会精彩，一边学会如何体会。	&lt;/li&gt;
+                &lt;li&gt;倘若你不会表达，就是说明你思考得不成熟。	&lt;/li&gt;
+                &lt;li&gt;问题是解决问题的开始。	&lt;/li&gt;
+                &lt;li&gt;现在就要想：将来做一个怎样的人。一分耕耘一分收获。	&lt;/li&gt;
+                &lt;li&gt;做人要明白，要有很高的业务水平和超强的自我控制能力、学习能力。	&lt;/li&gt;
+                &lt;li&gt;做人就要做一个：高品德，对事物有正确认识，才会有高素质，才会有高才能	&lt;/li&gt;
+                &lt;li&gt;学会去爱每一个人，为了国家为了民族的需要而活着！	&lt;/li&gt;
+                &lt;li&gt;要想成功，就要具备超常的耐力、毅力、动力！另外还有创新能力。	&lt;/li&gt;
+                &lt;li&gt;要有坚定的信念，坚定的信念，没有抱负哪有成功？	&lt;/li&gt;
+                &lt;li&gt;遇到困难的时候就是进步的时候，但前提是你必须知道或者明白如何把困难变成机会！	&lt;/li&gt;
+                &lt;li&gt;前途是光明的，道路是曲折的，面对坚信怎么办：要有毅力！	&lt;/li&gt;
+                &lt;li&gt;越早强大起来生存机会就越大！	&lt;/li&gt;
+                &lt;li&gt;美是需要共享的，你的美得不到大家的认同，只有你自己享受，那就不能再叫作美了	&lt;/li&gt;
+                &lt;li&gt;自信越用越多	&lt;/li&gt;
+                &lt;li&gt;如果放弃一次，那么碰到下一个挫折时我就会继续放弃；如果坚持而成功那么碰到下一个挑战时我会激励自己再取成功。	&lt;/li&gt;
+                &lt;li&gt;别着急，别怕刚开始的时候慢……	&lt;/li&gt;
+                &lt;li&gt;现在的大学教育是大众教育不是精英教育，你上大学了，最多说明你是一个大众人，找不到工作或者说毕业了不知道自己学了什么都挺正常的，因为你只是一个大众人。想做杰出的人，就要做精英，而精英不是上天给的，都是自己努力的，outstanding！为什么？因为你站在巨人的肩上了，可是怎么才能爬到巨人的肩上呢？那就是hardwork。	&lt;/li&gt;
+                &lt;li&gt;和你有关系吗？	&lt;/li&gt;
+                &lt;li&gt;办法总比困难多	&lt;/li&gt;
+            &lt;/random&gt;
+            详情请访问大米时代官网：http://www.dmsdbj.com/
+        &lt;/template&gt;
+    &lt;/category&gt;
+
+
+
+
+&lt;/aiml&gt;</code></pre><p>效果：</p><p><img src="https://img-blog.csdn.net/2018070917144213?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h2c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="" /><br /></p><p>使用tomcat启动，设置utf-8编码支持中文</p><p>  &lt;Connector port="8080" protocol="HTTP/1.1"<br />               connectionTimeout="20000"<br />               redirectPort="8443" URIEncoding="UTF-8" /&gt;<br /></p>            </div>
+                </div>
+
+

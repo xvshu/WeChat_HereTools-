@@ -1,0 +1,20 @@
+<!--pages/list/list.wxml-->
+<!--列表页-->
+<view >
+  <!--顶部标题栏-->
+  <view class='page-header'>
+    <text class='page-title'>精品博客</text>
+  </view>
+  <!--列表-->
+  <view class='page-body' wx:for="{{list}}" wx:key="id">
+      <navigator url='../{{item.num}}/blog'>
+        <view class='item'>
+          <view class='meta'>
+            <text class='title'>{{item.title}}</text>
+            <text class='sub-title'>{{item.sub}}</text>
+          </view>
+        </view>
+      </navigator>
+  
+  </view>
+</view>

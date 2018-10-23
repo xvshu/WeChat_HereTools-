@@ -1,0 +1,97 @@
+
+.container{
+  display: block;
+}
+.content{
+  background: #fff;
+  padding: 15px;
+}
+.content .post{
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 30rpx;
+  color: #333;
+}
+.content .header .title{
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.content .header text{
+  display: block;
+  margin-top: 8px;
+}
+
+.form .title{
+  display: flex;
+  flex-direction: row;
+}
+.form .title .box:nth-of-type(1){
+  width: 50px;
+  height: 40px;
+}
+.form .title .box:nth-of-type(1) image{
+  width: 40px;
+  height: 40px;
+  border-radius:5px;
+}
+.form .title .box:nth-of-type(2) image{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  position:relative;
+  top:5px;
+}
+.form .section input,
+.form .section textarea{
+  border: 4rpx solid #2ebaae;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 15px;
+  padding: 0 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form .section textarea{
+  height: 120px;
+}
+.form .btn-area button{
+  border: none;
+  color: #fff;
+  background: #2ebaae;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 15px;
+  border-radius: 0;
+}
+
+.comment{
+  margin: 20px 0;
+}
+.comment .title{
+  display: flex;
+  flex-direction: row;
+}
+.comment .title .box:nth-of-type(1){
+  width: 50px;
+  height: 40px;
+}
+.comment .title .box:nth-of-type(1) image{
+  width: 40px;
+  height: 40px;
+  border-radius:5px;
+}
+.comment .title .box:nth-of-type(2){
+  width:100%;
+}
+.comment-content{
+  border-bottom: 1px solid #f4f4f4;
+}
+.warning{
+  color: red;
+}
+button{
+  margin-top: 10px;
+}

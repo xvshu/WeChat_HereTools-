@@ -1,0 +1,21 @@
+<!--pages/SZJ/SZJ.wxml-->
+<view class="container">
+    <view class="table">
+        <view class="tr">
+            <view class="th">声</view>
+            <view class="th">律</view>
+            <view class="th">启</view>
+            <view class="th">蒙</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{st}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{sc}}</view>
+        </view>
+         <view  class="tr">
+            <button class="td" type="default" bindtap="upPage" > 上一页 </button>
+            <button class="td" type="default" bindtap="nextPage" > 下一页 </button>
+        </view>
+    </view>
+</view>

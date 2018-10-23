@@ -1,0 +1,32 @@
+<view class="content">
+    <!-- 头像 -->
+    <view class="author-date"> 
+        <image src="/image/1_xvshu.png" class="author"></image>
+        <text class="date">	2017年07月31日</text>
+    </view>
+    <!-- 标题内容 -->
+     <text class="title">flume高并发优化——（16）解决offsets变小问题</text>
+     <view>
+     <text class="h1">offsets初始化 \n</text>
+     <text class="article-content">在上篇博客中《flume高并发优化——（14）解决空行停止收集数据问题，及offsets变小问题 》我们遗留了一个小问题，就是offsets变小的问题，迟迟未解决，经过研究flume代码发现，flume中，是自己管理offsets关系的，每个kafkachannel的代码中保留了一份topic-offsets的关系，源码：
+\n</text>
+<image  src="/image/76419360/code1.jpg"></image>
+    <view>
+      <text class="article-content"> 我们发现，设置了agent1.channels.c1.migrateZookeeperOffsets=true,
+agent1.channels.c1.zookeeperConnect=10.1.115.181:2181,10.1.114.221:2181,10.1.114.231:2181/kafka，才可以触发offsets的初始化，我们希望offsets初始化的情况下，能够从kafka进行offsets对比，这种方法解决了初始化的问题。</text>
+    </view>
+
+    <view>
+      <text class="h1">分区调整： \n</text>
+      <text class="article-content"> 但是，还有问题就是offsets的变化问题，研究发现，在offsets提交中，遇到消费者多余分区的情况，在某些消费者重新分配的情况下，因为每个消费者都保留了topic-offsets对应关系，导致offsets消费重复，解决方法是改为自动提交，且分区>=消费者，修正后源码：</text>
+      <image  src="/image/76419360/code2.jpg"></image>
+    </view>
+     <view>
+      <text class="h1">总结： \n</text>
+      <text class="article-content">遇到此类问题，还是我们对于kafka的设计不熟悉，导致的问题，在源码的层次分析问题帮助我们更容易找到问题的梗结所在，推荐各大公司使用开源项目，便于定制与维护。</text>
+    </view>
+    
+  </view>
+
+
+</view>

@@ -1,0 +1,40 @@
+<!--pages/guoxue/guoxue.wxml-->
+
+<view class="container">
+    <view class="table">
+        <view class="tr">
+            <view class="th">经</view>
+            <view class="th">典</view>
+            <view class="th">启</view>
+            <view class="th">蒙</view>
+        </view>
+
+        <view class="tr">
+          <view class="td"  bindtap="gotoSZJ">
+          <image src='../../image/guoxue/SZJ.jpg' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+          <view class="td" bindtap="gotoQZW">
+            <image src='../../image/guoxue/QZW.jpg' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+        </view>
+
+        <view class="tr">
+          <view class="td" bindtap="gotoBJX">
+          <image src='../../image/guoxue/BJX.jpg' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+          <view class="td"  bindtap="gotoDZG">
+            <image src='../../image/guoxue/DZG.jpg' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+        </view>
+
+        <view class="tr">
+          <view class="td" bindtap="gotoSLQM" >
+          <image src='../../image/guoxue/SLQM.jpg' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+          <view class="td">
+           
+          </view>
+        </view>
+         
+    </view>
+</view>
