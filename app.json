@@ -18,7 +18,9 @@
     "pages/games/GIndex",
     "pages/games/QZW/QZW",
     "pages/games/BJX/BJX",
-    "pages/games/DZG/DZG"
+    "pages/games/DZG/DZG",
+    "pages/SH/LY/LY",
+    "pages/SH/MZ/MZ"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,7 +32,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "国学启蒙",
+        "text": "经典国学",
         "selectedIconPath": "icon/home1.png",
         "iconPath": "icon/home.png"
       },

@@ -1,54 +1,25 @@
-// pages/guoxue/guoxue.js
+var szjtxt = require('../../../utils/MZ.js');
+var text_index = 1;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-  },
-  gotoSZJ: function (options) {
-    wx.navigateTo({
-      url: '../SZJ/SZJ',
-    })
-  },
-
-  gotoQZW: function (options) {
-    wx.navigateTo({
-      url: '../QZW/QZW',
-    })
-  },
-  gotoBJX: function (options) {
-    wx.navigateTo({
-      url: '../BJX/BJX',
-    })
-  },
-  gotoDZG: function (options) {
-    wx.navigateTo({
-      url: '../DZG/DZG',
-    })
-  },
-  gotoSLQM: function (options) {
-    wx.navigateTo({
-      url: '../SLQM/SLQM',
-    })
-  },
-  gotoLY: function (options) {
-    wx.navigateTo({
-      url: '../SH/LY/LY',
-    })
-  },
-  gotoMZ: function (options) {
-    wx.navigateTo({
-      url: '../SH/MZ/MZ',
-    })
+    st: "",
+    sc: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var tabletext = szjtxt['s' + text_index];
+    var that = this;
+    that.setData({
+      st: tabletext["t"],
+      sc: tabletext["c"]
+    })
   },
 
   /**
@@ -98,5 +69,35 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  nextPage: function () {
+
+    if (text_index < 517) {
+      text_index = text_index + 1;
+    } else {
+      text_index = 517;
+    }
+    var tabletext = szjtxt['s' + text_index];
+    var that = this;
+    that.setData({
+      st: tabletext["t"],
+      sc: tabletext["c"]
+    })
+
+  },
+  upPage: function () {
+    if (text_index > 1) {
+      text_index = text_index - 1;
+    } else {
+      text_index = 1;
+    }
+    var tabletext = szjtxt["s" + text_index];
+    var that = this;
+    that.setData({
+      st: tabletext["t"],
+      sc: tabletext["c"]
+    })
   }
+
+
 })

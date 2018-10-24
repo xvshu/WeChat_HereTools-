@@ -1,0 +1,19 @@
+<!--pages/SZJ/SZJ.wxml-->
+<view class="container">
+    <view class="table">
+        <view class="tr trd">
+            <view class="th">孟</view>
+            <view class="th">子</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{st}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{sc}}</view>
+        </view>
+         <view  class="tr">
+            <button class="td" type="default" bindtap="upPage" > 上一页 </button>
+            <button class="td" type="default" bindtap="nextPage" > 下一页 </button>
+        </view>
+    </view>
+</view>

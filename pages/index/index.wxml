@@ -3,8 +3,8 @@
 <view class="container">
     <view class="table">
         <view class="tr">
-            <view class="th">经</view>
-            <view class="th">典</view>
+            <view class="th">国</view>
+            <view class="th">学</view>
             <view class="th">启</view>
             <view class="th">蒙</view>
         </view>
@@ -37,4 +37,25 @@
         </view>
          
     </view>
+
+    
+    <view class="table">
+        <view class="tr">
+            <view class="th">四</view>
+            <view class="th">书</view>
+        </view>
+
+        <view class="tr">
+          <view class="td"  bindtap="gotoLY">
+          <image src='../../image/guoxue/LY.png' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+          <view class="td" bindtap="gotoMZ">
+           <image src='../../image/guoxue/MZ.png' mode="aspectFit" style="width:95%;height:220px;"></image>
+          </view>
+        </view>
+
+       
+         
+    </view>
+
 </view>
