@@ -1,0 +1,51 @@
+<!--pages/games/SZJ/SZJ.wxml-->
+<view class="container">
+    <view class="table">
+      <view class="tr">
+          <view class="td">弟子规填词游戏</view>
+        </view>
+        <view class="tr">
+          <view class="td">当前分数：{{count}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s1}}</view>
+            <view class="td">{{s2}}</view>
+            <view class="td">{{s3}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s4}}</view>
+            <view class="td">{{s5}}</view>
+            <view class="td">{{s6}}</view>
+        </view>
+         <view class="tr">
+            <view class="td">{{s7}}</view>
+            <view class="td">{{s8}}</view>
+            <view class="td">{{s9}}</view>
+        </view>
+        <view class="tr">
+            <view class="td">{{s10}}</view>
+            <view class="td">{{s11}}</view>
+            <view class="td">{{s12}}</view>
+        </view>
+       
+        <view class="tr">
+            <view class="th">已选字符</view>
+        </view>
+         <view class="tr">
+            <view class="td" style='height:34px;'>{{gsv1}}</view>
+            <view class="td" style='height:34px;'>{{gsv2}}</view>
+        </view>
+        <view class="tr">
+            <view class="th">请选择字符</view>
+        </view>
+         <view  class="tr">
+            <button data-gsv='{{gs1}}' class="td" type="primary" bindtap="changegs" >{{gs1}}</button>
+            <button data-gsv='{{gs2}}' class="td" type="primary" bindtap="changegs" > {{gs2}} </button>
+            <button data-gsv='{{gs3}}' class="td" type="primary" bindtap="changegs" > {{gs3}} </button>
+        </view>
+    </view>
+</view>
+
+
+
+

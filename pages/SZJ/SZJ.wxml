@@ -1,7 +1,7 @@
 <!--pages/SZJ/SZJ.wxml-->
 <view class="container">
     <view class="table">
-        <view class="tr">
+        <view class="tr trd">
             <view class="th">三</view>
             <view class="th">字</view>
             <view class="th">经</view>

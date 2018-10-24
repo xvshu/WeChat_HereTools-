@@ -1,7 +1,7 @@
 <!--pages/SZJ/SZJ.wxml-->
 <view class="container">
     <view class="table">
-        <view class="tr">
+        <view class="tr trd">
             <view class="th">百</view>
             <view class="th">家</view>
             <view class="th">姓</view>

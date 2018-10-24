@@ -1,7 +1,7 @@
 <!--pages/SZJ/SZJ.wxml-->
 <view class="container">
     <view class="table">
-        <view class="tr">
+        <view class="tr trd">
             <view class="th">声</view>
             <view class="th">律</view>
             <view class="th">启</view>

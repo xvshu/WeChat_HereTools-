@@ -94,10 +94,10 @@ Page({
   },
   nextPage: function () {
 
-    if (text_index < 118) {
+    if (text_index < 90) {
       text_index = text_index + 1;
     } else {
-      text_index = 118;
+      text_index = 90;
     }
     var tabletext = szjtxt['s' + text_index];
     var listtext = tabletext.split('');

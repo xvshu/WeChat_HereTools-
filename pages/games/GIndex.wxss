@@ -1,3 +1,4 @@
+/* pages/guoxue/guoxue.wxss */
 /* pages/SZJ/SZJ.wxss */
 page {
   font-size: 54px;
@@ -8,19 +9,11 @@ page {
   border-right: 0;
   border-bottom: 0;
   width: 98%;
-  border-top-left-radius:15px;
-  border-top-right-radius:15px;
 }
 .tr {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-.trd{
-  border-top-left-radius:15px;
-  border-top-right-radius:15px;
-  color: rgb(248, 248, 248);
-  font-size: 34px;
 }
 .th,.td {
   padding: 10px;
@@ -31,7 +24,7 @@ page {
 }
 .th {
   font-weight: 400;
-  background-color: #dadada;
+  background-color: #dadada
 }
 button{
   margin-top: 10px;

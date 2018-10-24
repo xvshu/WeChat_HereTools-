@@ -13,7 +13,12 @@
     "pages/QZW/QZW",
     "pages/BJX/BJX",
     "pages/DZG/DZG",
-    "pages/SLQM/SLQM"
+    "pages/SLQM/SLQM",
+    "pages/games/SZJ/SZJ",
+    "pages/games/GIndex",
+    "pages/games/QZW/QZW",
+    "pages/games/BJX/BJX",
+    "pages/games/DZG/DZG"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,6 +33,12 @@
         "text": "国学启蒙",
         "selectedIconPath": "icon/home1.png",
         "iconPath": "icon/home.png"
+      },
+      {
+        "pagePath": "pages/games/GIndex",
+        "text": "开心游戏",
+        "selectedIconPath": "icon/game1.png",
+        "iconPath": "icon/game.png"
       },
       {
         "pagePath": "pages/message/message",

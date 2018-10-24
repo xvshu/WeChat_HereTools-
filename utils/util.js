@@ -14,6 +14,17 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const roa = (arr,count) =>{
+  var temp=new Array();    //temp存放生成的随机数
+    for (var i=0;i<count;i++)
+    { 
+        var num=Math.floor(Math.random()*arr.length); //生成随机数num
+        temp.push(arr[num]);    //获取arr[num]并放入temp
+        arr.splice(num,1);    
+    }
+    return temp;
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  roa:  roa
 }
